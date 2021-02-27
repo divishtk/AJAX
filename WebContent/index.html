@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script>
+var request = new XMLHttpRequest();//1
+function searchInfo()//2
+{
+	var name = document.myForm.name.value;//3
+	var url = "search.jsp?val="+name;//
+	
+	try{
+		request.onreadystatechange = function()
+		{
+			if(request.readyState == 4){
+				var val= request.responseText;
+				document.getElementById("mylocation").innerHTML = val;
+			}
+		}
+		request.open("GET",url,true);
+		request.send();
+	}catch(e){
+		alert("Unable to Connect To server");
+	}
+}
+</script>
+<title>AJAX Demo</title>
+</head>
+<style>
+html, body {
+	height: 100%;
+}
+
+html {
+	display: table;
+	margin: auto;
+}
+
+
+
+.cust {
+	padding: 100px;
+}
+</style>
+<body>
+
+<div class="container  cust">
+		<center>
+			<h2>Search Employee</h2>
+		</center>
+		</br>
+		<form class="form-horizontal" name="myForm">
+			<div class="form-group">
+				<label class="control-label col-sm-2">Name:</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" placeholder="Enter Name"
+						name="name" name="name" onkeyup="searchInfo()">
+				</div>
+			</div>
+			
+	</form>
+	</div>
+
+
+<br><br>
+<span id="mylocation"></span>
+</body>
+</html>
